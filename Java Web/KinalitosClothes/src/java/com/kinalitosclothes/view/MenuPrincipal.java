@@ -1,6 +1,6 @@
 package com.kinalitosclothes.view;
 
-import com.kinalitosclothes.model.*;
+import com.kinalitosclothes.modelo.*;
 
 import java.util.Scanner;
 

@@ -3,22 +3,20 @@
     padding: 0;
     box-sizing: border-box;
 }
- 
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-image: url(../Images/negro1.jpeg);
     background-size: cover;
-    /* Quepa completa dentro del body */
     background-repeat: no-repeat;
-    /* No repetir */
     background-position: center top;
-    /* Centrada arriba */
     background-attachment: fixed;
-    /* (Opcional) Efecto parallax */
     min-height: 100vh;
     color: #212529;
     padding-top: 120px;
 }
+
+/* ...resto igual a vistaproductoadmin.css... */
  
 .navbar {
     width: 100%;
