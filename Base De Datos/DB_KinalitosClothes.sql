@@ -64,17 +64,22 @@ Create table Clientes(
 );
 
 -- Empleados
-Create table Empleados(
-	codigoEmpleado int auto_increment,
-	nombreEmpleado varchar(100) not null,
-	apellidoEmpleado varchar(100) not null,
-	correoEmpleado varchar(150) not null,
-	telefonoEmpleado varchar(20) not null,
-	direccionEmpleado varchar(200) not null,
-    codigoUsuario int not null, 
-    primary key PK_codigoEmpleado (codigoEmpleado),
-    constraint FK_EmpleadocodigoUsuario foreign key (codigoUsuario)
-		references Usuarios (codigoUsuario)
+CREATE TABLE Empleados (
+    codigoEmpleado INT AUTO_INCREMENT,
+    nombreEmpleado VARCHAR(100) NOT NULL,
+    apellidoEmpleado VARCHAR(100) NOT NULL,
+    correoEmpleado VARCHAR(150) NOT NULL,
+    telefonoEmpleado VARCHAR(20) NOT NULL,
+    direccionEmpleado VARCHAR(200) NOT NULL,
+    codigoUsuario INT NOT NULL,
+    
+    -- Nuevas columnas para el login
+    usuario VARCHAR(50) NOT NULL UNIQUE,
+    contrasena VARCHAR(100) NOT NULL,
+
+    PRIMARY KEY PK_codigoEmpleado (codigoEmpleado),
+    CONSTRAINT FK_EmpleadocodigoUsuario FOREIGN KEY (codigoUsuario)
+        REFERENCES Usuarios (codigoUsuario)
 );
 
 -- Productos
@@ -671,38 +676,49 @@ call sp_EditarCliente(20, 'Valeria', 'Guzmán', 'valeria.guzman@gmail.com', '+50
 -- --------------------------- Entidad Empleado --------------------------- 
 -- Agregar Empleados
 Delimiter //
-	Create procedure sp_AgregarEmpleado(
-    in nombreEmpleado varchar(100),
-    in apellidoEmpleado varchar(100), 
-    in correoEmpleado varchar(150), 
-    in telefonoEmpleado varchar(20), 
-    in direccionEmpleado varchar(200),
-    in codigoUsuario int)
-		Begin
-			Insert into Empleados(nombreEmpleado, apellidoEmpleado, correoEmpleado, telefonoEmpleado, direccionEmpleado, codigoUsuario)
-				Values(nombreEmpleado, apellidoEmpleado, correoEmpleado, telefonoEmpleado, direccionEmpleado, codigoUsuario);
-        End //
+CREATE PROCEDURE sp_AgregarEmpleado(
+    IN nombreEmpleado VARCHAR(100),
+    IN apellidoEmpleado VARCHAR(100),
+    IN correoEmpleado VARCHAR(150),
+    IN telefonoEmpleado VARCHAR(20),
+    IN direccionEmpleado VARCHAR(200),
+    IN codigoUsuario INT,
+    IN usuario VARCHAR(50),      -- Nuevo parámetro
+    IN contrasena VARCHAR(100)   -- Nuevo parámetro
+)
+BEGIN
+    INSERT INTO Empleados(
+        nombreEmpleado, apellidoEmpleado, correoEmpleado,
+        telefonoEmpleado, direccionEmpleado, codigoUsuario,
+        usuario, contrasena
+    )
+    VALUES(
+        nombreEmpleado, apellidoEmpleado, correoEmpleado,
+        telefonoEmpleado, direccionEmpleado, codigoUsuario,
+        usuario, contrasena
+    );
+END //
 Delimiter ;
-call sp_AgregarEmpleado('Juan', 'Ramírez', 'juan.ramirez@empresa.com', '+502 5123-1123', 'Zona 1, Ciudad de Guatemala', 1);
-call sp_AgregarEmpleado('Karla', 'López', 'karla.lopez@empresa.com', '+502 4789-2210', 'Zona 9, Ciudad de Guatemala', 2);
-call sp_AgregarEmpleado('Roberto', 'Pérez', 'roberto.perez@empresa.com', '+502 5567-3344', 'Zona 4, Mixco', 3);
-call sp_AgregarEmpleado('Sofía', 'Gómez', 'sofia.gomez@empresa.com', '+502 4123-5588', 'Zona 10, Guatemala', 4);
-call sp_AgregarEmpleado('Luis', 'Castro', 'luis.castro@empresa.com', '+502 6345-1234', 'Zona 2, San Cristóbal', 5);
-call sp_AgregarEmpleado('Ana', 'Cabrera', 'ana.cabrera@empresa.com', '+502 7098-4321', 'Zona 6, Guatemala', 6);
-call sp_AgregarEmpleado('Mario', 'Sánchez', 'mario.sanchez@empresa.com', '+502 3289-7789', 'Zona 5, Mixco', 7);
-call sp_AgregarEmpleado('Elena', 'Martínez', 'elena.martinez@empresa.com', '+502 5454-6677', 'Zona 14, Guatemala', 8);
-call sp_AgregarEmpleado('Carlos', 'Velásquez', 'carlos.velasquez@empresa.com', '+502 6789-1122', 'Villa Nueva, zona 3', 9);
-call sp_AgregarEmpleado('María', 'Hernández', 'maria.hernandez@empresa.com', '+502 4321-2345', 'Zona 3, Ciudad de Guatemala', 10);
-call sp_AgregarEmpleado('Diego', 'Ortega', 'diego.ortega@empresa.com', '+502 7654-1203', 'San Miguel Petapa', 11);
-call sp_AgregarEmpleado('Lucía', 'Morales', 'lucia.morales@empresa.com', '+502 8521-9987', 'Zona 7, Mixco', 12);
-call sp_AgregarEmpleado('Pablo', 'Reyes', 'pablo.reyes@empresa.com', '+502 9087-2310', 'Zona 16, Cayalá', 13);
-call sp_AgregarEmpleado('Andrea', 'García', 'andrea.garcia@empresa.com', '+502 3456-7812', 'Zona 12, La Reformita', 14);
-call sp_AgregarEmpleado('Fernando', 'Chávez', 'fernando.chavez@empresa.com', '+502 1111-9999', 'Villa Canales', 14);
-call sp_AgregarEmpleado('Isabel', 'Rosales', 'isabel.rosales@empresa.com', '+502 7890-4567', 'Zona 8, Guatemala', 16);
-call sp_AgregarEmpleado('Gabriel', 'Torres', 'gabriel.torres@empresa.com', '+502 6234-8765', 'Zona 11, Mariscal', 17);
-call sp_AgregarEmpleado('Valeria', 'Navarro', 'valeria.navarro@empresa.com', '+502 9123-4456', 'Amatitlán', 18);
-call sp_AgregarEmpleado('Óscar', 'Luna', 'oscar.luna@empresa.com', '+502 8888-1212', 'Jocotenango, zona 2', 19);
-call sp_AgregarEmpleado('Rebeca', 'Juárez', 'rebeca.juarez@empresa.com', '+502 7766-3344', 'Santa Catarina Pinula', 20);
+call sp_AgregarEmpleado('Juan', 'Ramírez', 'juan.ramirez@empresa.com', '+502 5123-1123', 'Zona 1, Ciudad de Guatemala', 1, 'juanramirez', 'pass123');
+call sp_AgregarEmpleado('Karla', 'López', 'karla.lopez@empresa.com', '+502 4789-2210', 'Zona 9, Ciudad de Guatemala', 2, 'karlopez', 'pass123');
+call sp_AgregarEmpleado('Roberto', 'Pérez', 'roberto.perez@empresa.com', '+502 5567-3344', 'Zona 4, Mixco', 3, 'robertop', 'pass123');
+call sp_AgregarEmpleado('Sofía', 'Gómez', 'sofia.gomez@empresa.com', '+502 4123-5588', 'Zona 10, Guatemala', 4, 'sofig', 'pass123');
+call sp_AgregarEmpleado('Luis', 'Castro', 'luis.castro@empresa.com', '+502 6345-1234', 'Zona 2, San Cristóbal', 5, 'luiscastro', 'pass123');
+call sp_AgregarEmpleado('Ana', 'Cabrera', 'ana.cabrera@empresa.com', '+502 7098-4321', 'Zona 6, Guatemala', 6, 'anac', 'pass123');
+call sp_AgregarEmpleado('Mario', 'Sánchez', 'mario.sanchez@empresa.com', '+502 3289-7789', 'Zona 5, Mixco', 7, 'marios', 'pass123');
+call sp_AgregarEmpleado('Elena', 'Martínez', 'elena.martinez@empresa.com', '+502 5454-6677', 'Zona 14, Guatemala', 8, 'elenam', 'pass123');
+call sp_AgregarEmpleado('Carlos', 'Velásquez', 'carlos.velasquez@empresa.com', '+502 6789-1122', 'Villa Nueva, zona 3', 9, 'carlosv', 'pass123');
+call sp_AgregarEmpleado('María', 'Hernández', 'maria.hernandez@empresa.com', '+502 4321-2345', 'Zona 3, Ciudad de Guatemala', 10, 'mariah', 'pass123');
+call sp_AgregarEmpleado('Diego', 'Ortega', 'diego.ortega@empresa.com', '+502 7654-1203', 'San Miguel Petapa', 11, 'diegoo', 'pass123');
+call sp_AgregarEmpleado('Lucía', 'Morales', 'lucia.morales@empresa.com', '+502 8521-9987', 'Zona 7, Mixco', 12, 'luciam', 'pass123');
+call sp_AgregarEmpleado('Pablo', 'Reyes', 'pablo.reyes@empresa.com', '+502 9087-2310', 'Zona 16, Cayalá', 13, 'pablor', 'pass123');
+call sp_AgregarEmpleado('Andrea', 'García', 'andrea.garcia@empresa.com', '+502 3456-7812', 'Zona 12, La Reformita', 14, 'andreas', 'pass123');
+call sp_AgregarEmpleado('Fernando', 'Chávez', 'fernando.chavez@empresa.com', '+502 1111-9999', 'Villa Canales', 14, 'ferchavez', 'pass123');
+call sp_AgregarEmpleado('Isabel', 'Rosales', 'isabel.rosales@empresa.com', '+502 7890-4567', 'Zona 8, Guatemala', 16, 'isabelr', 'pass123');
+call sp_AgregarEmpleado('Gabriel', 'Torres', 'gabriel.torres@empresa.com', '+502 6234-8765', 'Zona 11, Mariscal', 17, 'gabot', 'pass123');
+call sp_AgregarEmpleado('Valeria', 'Navarro', 'valeria.navarro@empresa.com', '+502 9123-4456', 'Amatitlán', 18, 'valerian', 'pass123');
+call sp_AgregarEmpleado('Óscar', 'Luna', 'oscar.luna@empresa.com', '+502 8888-1212', 'Jocotenango, zona 2', 19, 'oscar_luna', 'pass123');
+call sp_AgregarEmpleado('Rebeca', 'Juárez', 'rebeca.juarez@empresa.com', '+502 7766-3344', 'Santa Catarina Pinula', 20, 'rebecaj', 'pass123');
 
 -- Listar Empleados
 Delimiter //

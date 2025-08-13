@@ -23,7 +23,18 @@
             <div class="nav-content">
                 <div class="logo">K<span>C</span></div>
                 <ul class="menu">
+                    <li><a href="vistaclientesadmin.jsp">VistaCliente</a></li>
+                    <li><a href="vistaproveedoradmin.jsp">VistaProveedor</a></li>
+                    <li><a href="vistacategoria.jsp">VistaCategoria</a></li>
+                    <li><a href="metodopagoadmin.jsp">VistaMetodoPago</a></li>
+                    <li><a href="VistaUsuarioAdmin.jsp">VistaUsuario</a></li>
                     <li><a href="menu.jsp">INICIO</a></li>
+                    <li><a href="vistaproductoadmin.jsp">VistaProducto</a></li>
+                    <li><a href="vistapedidoadmin.jsp">VistaPedidos</a></li>
+                    <li><a href="vistadetallepedidoadmin.jsp">VistaDetallePedido</a></li>
+                    <li><a href="VistaFacturaAdmin.jsp">VistaFactura</a></li>
+                    <li><a href="vistaempleadoadmin.jsp">VistaEmpleado</a></li>
+                    
                 </ul>
             </div>
         </nav>

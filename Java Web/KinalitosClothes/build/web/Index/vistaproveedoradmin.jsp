@@ -4,11 +4,11 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta https-equiv=" X-UA-Compatible" content="IE-edge">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRUD_Proveedor</title>
     <link rel="icon" type="image/x-icon" href="../Images/Logo_K.C.png">
-    <link rel="stylesheet" href="../Styles/vistaproveedoradmin.css">
+    <link rel="stylesheet" href="../Styles/vistaproductoadmin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
@@ -17,7 +17,18 @@
         <div class="nav-content">
             <div class="logo">K<span>C</span></div>
             <ul class="menu">
-                <li><a href="vistaadmin.jsp">Menu Administrador</a></li>
+                    <li><a href="vistaclientesadmin.jsp">VistaCliente</a></li>
+                    <li><a href="vistaproveedoradmin.jsp">VistaProveedor</a></li>
+                    <li><a href="vistacategoria.jsp">VistaCategoria</a></li>
+                    <li><a href="metodopagoadmin.jsp">VistaMetodoPago</a></li>
+                    <li><a href="VistaUsuarioAdmin.jsp">VistaUsuario</a></li>
+                    <li><a href="vistaadmin.jsp">INICIO</a></li>
+                    <li><a href="vistaproductoadmin.jsp">VistaProducto</a></li>
+                    <li><a href="vistapedidoadmin.jsp">VistaPedidos</a></li>
+                    <li><a href="vistadetallepedidoadmin.jsp">VistaDetallePedido</a></li>
+                    <li><a href="VistaFacturaAdmin.jsp">VistaFactura</a></li>
+                    <li><a href="vistaempleadoadmin.jsp">VistaEmpleado</a></li>
+                    </ul>
             </ul>
         </div>
     </nav>
@@ -57,19 +68,19 @@
                         </div>
                     </div>
                     <div class="form-row">
-                        <button type="button" class="btn_crear_producto">
-                            <span class="bnt_texto">Crear Proveedor</span>
-                            <span class="btn_icono">
-                                <i class="fa-solid fa-plus"></i>
-                            </span>
-                        </button>
-                        <button type="button" class="btn_actualizar">
-                            <span class="bnt_texto">Actualizar</span>
-                            <span class="btn_icono">
-                                <i class="fa-solid fa-pen-to-square"></i>
-                            </span>
-                        </button>
-                    </div>
+                    <button type="button" class="btn_crear_producto">
+                        <span class="bnt_texto">Crear Proveedor</span>
+                        <span class="btn_icono">
+                            <i class="fa-solid fa-plus"></i>
+                        </span>
+                    </button>
+                    <button type="button" class="btn_actualizar">
+                        <span class="bnt_texto">Actualizar</span>
+                        <span class="btn_icono">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </span>
+                    </button>
+                </div>
                 </form>
             </div>
 
